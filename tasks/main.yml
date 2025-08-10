@@ -1,0 +1,39 @@
+---
+- name: Install required packages
+  yum:
+    name:
+      - python3
+      - python3-pip
+      - sqlite
+    state: present
+
+- name: Install Flask
+  pip:
+    name: flask
+    executable: pip3
+
+- name: Ensure templates directory exists
+  file:
+    path: /home/ec2-user/templates
+    state: directory
+    mode: '0755'
+
+- name: Copy Python app
+  copy:
+    src: app.py
+    dest: /home/ec2-user/app.py
+    mode: '0755'
+
+- name: Copy HTML template
+  template:
+    src: index.html.j2
+    dest: /home/ec2-user/templates/index.html
+    mode: '0644'
+
+- name: Start Python app
+  shell: |
+    nohup python3 /home/ec2-user/app.py &
+  args:
+    chdir: /home/ec2-user
+  async: 30
+  poll: 0

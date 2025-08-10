@@ -1,0 +1,18 @@
+---
+galaxy_info:
+  author: Ali Abdelhakem
+  description: Deploys a Flask-based note-taking app on EC2 with SQLite
+  company: ""
+  license: MIT
+  min_ansible_version: 2.9
+  platforms:
+    - name: EL
+      versions:
+        - 7
+        - 8
+  galaxy_tags:
+    - flask
+    - python
+    - web
+    - sqlite
+dependencies: []
